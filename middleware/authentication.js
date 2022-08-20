@@ -4,7 +4,7 @@ const { isTokenValid } = require('../utils')
 const authenticateUser = async (req, res, next) => {
   const authHeader = req.headers.authorization
 
-  if (!authHeader || !authHeader.startsWith('Bearer')) {
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new CustomError.UnauthenticatedError('Authentication Invalid')
   }
 
