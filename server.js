@@ -7,6 +7,7 @@ const app = express()
 // rest of the packages
 const morgan = require('morgan')
 const cors = require('cors')
+const helmet = require('helmet')
 
 // database
 const connectDB = require('./db/connect')
@@ -20,6 +21,7 @@ const jobRouter = require('./routes/jobRoutes')
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
+app.use(helmet())
 app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json())
