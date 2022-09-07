@@ -2,6 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 const {
+  authenticateUser,
+  authorizePermissions,
+} = require('../middleware/authentication')
+
+const {
   createEvent,
   getEvent,
   getAllEvents,
@@ -9,14 +14,9 @@ const {
   deleteEvent,
 } = require('../controllers/eventController')
 
-const {
-  authenticateUser,
-  authorizePermissions,
-} = require('../middleware/authentication')
-
 router
   .route('/')
-  .post([authenticateUser, authorizePermissions('event')], createEvent)
+  .post([authenticateUser, authorizePermissions('admin', 'event')], createEvent)
   .get(getAllEvents)
 
 router

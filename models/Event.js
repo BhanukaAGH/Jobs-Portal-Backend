@@ -13,14 +13,21 @@ const eventSchema = new mongoose.Schema({
   //   type: String,
   //   required: [true, 'Please provide Job Category Targeted'],
   // },
+
+  deliveryType: {
+    type: String,
+    enum: ['Virtual', 'Physical'],
+    required: [true, 'Please provide event location'],
+  },
+
   location: {
     type: String,
     required: [true, 'Please provide event location'],
   },
-  // date: {
-  //   type: String,
-  //   required: [true, 'Please provide event date'],
-  // },
+  date: {
+    type: Date,
+    required: [true, 'Please provide event date'],
+  },
 
   description: {
     type: String,

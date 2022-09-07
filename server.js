@@ -17,6 +17,7 @@ const authRouter = require('./routes/authRoutes')
 const companyRouter = require('./routes/companyRoutes')
 const jobRouter = require('./routes/jobRoutes')
 const candidateRouter = require('./routes/candidateRoutes')
+const eventRouter = require('./routes/eventRoutes')
 
 // middleware
 const notFoundMiddleware = require('./middleware/not-found')
@@ -35,6 +36,7 @@ app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/company', companyRouter)
 app.use('/api/v1/job', jobRouter)
 app.use('/api/v1/candidate', candidateRouter)
+app.use('/api/v1/event', eventRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
