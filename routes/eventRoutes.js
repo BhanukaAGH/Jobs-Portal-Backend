@@ -1,4 +1,6 @@
 const express = require('express')
+const router = express.Router()
+
 const {
   createEvent,
   getEvent,
@@ -6,7 +8,6 @@ const {
   updateEvent,
   deleteEvent,
 } = require('../controllers/eventController')
-const router = express.Router()
 
 const {
   authenticateUser,
