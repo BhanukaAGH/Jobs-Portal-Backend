@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
 
 const eventSchema = new mongoose.Schema({
+  company: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Please provide company id'],
+  },
+
   eventTiltle: {
     type: String,
     required: [true, 'Please provide Event title'],
