@@ -4,7 +4,7 @@ const jobSchema = new mongoose.Schema(
   {
     company: {
       type: mongoose.Types.ObjectId,
-      ref: 'Company',
+      ref: 'User',
       required: [true, 'Please provide company id'],
     },
     jobTitle: {

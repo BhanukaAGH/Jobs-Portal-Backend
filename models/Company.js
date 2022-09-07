@@ -32,6 +32,10 @@ const companySchema = new mongoose.Schema({
     minlength: [20, 'mininmum lenght is 20'],
     maxlength: [500, 'maximum length is 500'],
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 module.exports = mongoose.model('Company', companySchema)
