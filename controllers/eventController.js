@@ -4,7 +4,7 @@ const CustomError = require('../errors')
 
 //! POST Event
 const createEvent = async (req, res) => {
-  req.body.event = req.user.userId
+  req.body.company = req.user.userId
   const event = await Event.create(req.body)
   res.status(StatusCodes.CREATED).json(event)
 }

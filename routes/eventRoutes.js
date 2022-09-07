@@ -16,18 +16,18 @@ const {
 
 router
   .route('/')
-  .post([authenticateUser, authorizePermissions('admin', 'event')], createEvent)
+  .post([authenticateUser, authorizePermissions('company')], createEvent)
   .get(getAllEvents)
 
 router
   .route('/:id')
-  .get([authenticateUser, authorizePermissions('admin', 'event')], getEvent)
+  .get([authenticateUser, authorizePermissions('admin', 'company')], getEvent)
   .patch(
-    [authenticateUser, authorizePermissions('admin', 'event')],
+    [authenticateUser, authorizePermissions('admin', 'company')],
     updateEvent
   )
   .delete(
-    [authenticateUser, authorizePermissions('admin', 'event')],
+    [authenticateUser, authorizePermissions('admin', 'company')],
     deleteEvent
   )
 
