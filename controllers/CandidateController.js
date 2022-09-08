@@ -28,7 +28,6 @@ const getAllJobs = async (req, res) => {
     throw new Error("eror in retriving jobs");
   }
 };
-
 //candidate GET ALL Events using pagination
 const getAllEvents = async (req, res) => {
   const PageSize = 4;
