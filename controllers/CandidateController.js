@@ -191,7 +191,7 @@ const deleteSavedEvents = async (req, res) => {
       res.status(StatusCodes.OK).send({ msg: "Unsaved" });
     } else {
       res.status(StatusCodes.BAD_REQUEST).send({ msg: "error in unsaving" });
-      return;
+      return
     }
   } catch (error) {
     res.status(400).send({ msg: "eror unsaving" });
