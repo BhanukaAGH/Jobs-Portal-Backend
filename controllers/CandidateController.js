@@ -68,23 +68,58 @@ const getSavedJobs = async (req, res) => {
     throw new Error("eror in retriving saved jobs");
   }
 };
-
+//get all saved jobs to view in saved page
+const getALLSavedJobs = async (req, res) => {
+  const { userID: userID } = req.params;
+  try {
+    var find = await SavedJob.find({ userID: userID }).populate({
+      path:"JobID",
+      populate:{
+        path:"company"
+      }
+    })
+    res.status(StatusCodes.OK).json({
+      find,
+    });
+  } catch (error) {
+    res.status(400).send({ msg: "eror in retriving saved jobs" });
+    throw new Error("eror in retriving saved jobs");
+  }
+};
+//get all saved Events to view in saved page
+const getALLSavedEvents = async (req, res) => {
+  const { userID: userID } = req.params;
+  try {
+    var find = await SavedEvents.find({ userID: userID }).populate({
+      path:"EventID",
+      populate:{
+        path:"company"
+      }
+    })
+    res.status(StatusCodes.OK).json({
+      find,
+    });
+  } catch (error) {
+    res.status(400).send({ msg: "eror in retriving saved jobs" });
+    throw new Error("eror in retriving saved jobs");
+  }
+};
 //delete saved jobs
 const deleteSavedJobs = async (req, res) => {
-    const { JobID: JobID } = req.params;
-    try {
-      const find = await SavedJob.deleteOne({ JobID: JobID });
-      if(find){
-        res.status(StatusCodes.OK).send({ msg: "Unsaved" });
-      }else{
-        res.status(StatusCodes.BAD_REQUEST).send({ msg: "error in unsaving" });
-        return
-      }
-    } catch (error) {
-      res.status(400).send({ msg: "eror unsaving" });
-      throw new Error("eror in unsaving");
+  const { JobID: JobID } = req.params;
+  try {
+    const find = await SavedJob.deleteOne({ JobID: JobID });
+    if (find) {
+      res.status(StatusCodes.OK).send({ msg: "Unsaved" });
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).send({ msg: "error in unsaving" });
+      return;
     }
-  };
+  } catch (error) {
+    res.status(400).send({ msg: "eror unsaving" });
+    throw new Error("eror in unsaving");
+  }
+};
 
 //candidate GET ALL Events using pagination
 const getAllEvents = async (req, res) => {
@@ -150,21 +185,19 @@ const getSavedEvents = async (req, res) => {
 //delete saved events
 const deleteSavedEvents = async (req, res) => {
   const { EventID: EventID } = req.params;
-  console.log("Event",EventID)
   try {
     const find = await SavedEvents.deleteOne({ EventID: EventID });
-    if(find){
+    if (find) {
       res.status(StatusCodes.OK).send({ msg: "Unsaved" });
-    }else{
+    } else {
       res.status(StatusCodes.BAD_REQUEST).send({ msg: "error in unsaving" });
-      return
+      return;
     }
   } catch (error) {
     res.status(400).send({ msg: "eror unsaving" });
     throw new Error("eror in unsaving");
   }
 };
-
 
 module.exports = {
   getAllJobs,
@@ -174,6 +207,9 @@ module.exports = {
   getAllEvents,
   saveEvent,
   getSavedEvents,
-  deleteSavedEvents
+  deleteSavedEvents,
+  getALLSavedJobs,
+  getALLSavedEvents
+  
 };
 //
