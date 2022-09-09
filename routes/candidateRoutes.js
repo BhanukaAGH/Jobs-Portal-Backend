@@ -5,7 +5,9 @@ const {
     authenticateUser,
     authorizePermissions} = require('../middleware/authentication')
   
-const {getAllJobs,saveJob,getSavedJobs,deleteSavedJobs,getAllEvents,saveEvent,getSavedEvents,deleteSavedEvents,getALLSavedJobs,getALLSavedEvents} = require('../controllers/CandidateController')
+const {getAllJobs,saveJob,getSavedJobs,deleteSavedJobs,getAllEvents,
+    saveEvent,getSavedEvents,deleteSavedEvents,getALLSavedJobs,getALLSavedEvents,
+    AddResume,getUserResume,UpdateResume,RemoveResume} = require('../controllers/CandidateController')
 
 //job routes
 router.route('/getAllJobs').get(getAllJobs)
@@ -25,5 +27,10 @@ router.route('/getsaveEvent/:userID').get([authenticateUser, authorizePermission
 router.route('/getsaveEvents/:userID').get([authenticateUser, authorizePermissions('user','admin')],getALLSavedEvents)
 router.route('/delsaveEvent/:EventID').delete([authenticateUser, authorizePermissions('user','admin')],deleteSavedEvents)
 
+//resume routes
+router.route('/addResume').post([authenticateUser, authorizePermissions('user')],AddResume)
+router.route('/updateResume').post([authenticateUser, authorizePermissions('user')],UpdateResume)
+router.route('/viewResume/:userID').get(getUserResume)
+router.route('/removeResume/:userID').delete([authenticateUser, authorizePermissions('user')],RemoveResume)
 module.exports = router
 
