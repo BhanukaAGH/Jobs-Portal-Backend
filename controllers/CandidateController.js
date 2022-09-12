@@ -66,10 +66,9 @@ const getAllJobs = async (req, res) => {
       .limit(PageSize)
       .skip(PageSize * page);
 
-      const Count = await Job.find(filter)
-      .populate("company")
+    const Count = await Job.find(filter).populate("company");
 
-    const JobsCount =Count.length
+    const JobsCount = Count.length;
     //count number of results found
     const count = await Job.find(filter);
     const ResultsFound = count.length;
@@ -92,6 +91,7 @@ const getAllJobs = async (req, res) => {
 const getAllEvents = async (req, res) => {
   const PageSize = 4;
   const page = parseInt(req.query.page || 0);
+
   try {
     const events = await Event.find({})
       .populate("company")
