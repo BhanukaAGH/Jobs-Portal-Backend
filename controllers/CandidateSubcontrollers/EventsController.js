@@ -26,7 +26,7 @@ const saveEvent = async (req, res) => {
     return;
   }
 };
-//get all saved events
+//get  saved event
 const getSavedEvents = async (req, res) => {
   const { userID: userID } = req.params;
   try {

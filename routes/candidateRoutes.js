@@ -10,7 +10,7 @@ const {getAllJobs,saveJob,getSavedJobs,deleteSavedJobs,getAllEvents,
     AddResume,getUserResume,UpdateResume,RemoveResume} = require('../controllers/CandidateController')
 
 //job routes
-router.route('/getAllJobs').get(getAllJobs)
+router.route('/getAllJobs').post(getAllJobs)
 router.route('/saveJob').post(saveJob)
 //to get array of jobids
 router.route('/getsaveJob/:userID').get([authenticateUser, authorizePermissions('user','admin')],getSavedJobs)
