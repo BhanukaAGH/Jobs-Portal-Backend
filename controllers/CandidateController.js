@@ -33,6 +33,7 @@ const getAllJobs = async (req, res) => {
     // for search data
     var locationregex = new RegExp(`.*${Location}.*`, "i");
     var keywordregex = new RegExp(`.*${keyword}.*`, "i");
+    //searching options
     if (keyword && !Location) {
       filter = {
         $or: [
@@ -91,7 +92,6 @@ const getAllJobs = async (req, res) => {
 const getAllEvents = async (req, res) => {
   const PageSize = 4;
   const page = parseInt(req.query.page || 0);
-
   try {
     const events = await Event.find({})
       .populate("company")
