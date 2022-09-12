@@ -22,8 +22,8 @@ const getJob = async (req, res) => {
 
 //! GET ALL JOB
 const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({})
-  res.status(StatusCodes.OK).json({ jobs, count: jobs.length })
+  const jobs = await Job.find({ company: req.user.userId })
+  res.status(StatusCodes.OK).json({ jobs, count: jobs?.length })
 }
 
 //! UPDATE JOB

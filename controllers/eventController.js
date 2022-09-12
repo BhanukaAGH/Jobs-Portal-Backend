@@ -9,6 +9,17 @@ const createEvent = async (req, res) => {
   res.status(StatusCodes.CREATED).json(event)
 }
 
+//Get Events by Company ID
+const getEventsByCompanyId = async (req, res) => {
+  const events = await Event.find({ company: req.user.userId })
+
+  if (!events) {
+    throw new CustomError.NotFoundError(`No events for company id : ${userId}`)
+  }
+
+  res.status(StatusCodes.OK).json(events)
+}
+
 //! GET Event
 const getEvent = async (req, res) => {
   const { id: eventId } = req.params
@@ -56,6 +67,7 @@ const deleteEvent = async (req, res) => {
 module.exports = {
   createEvent,
   getEvent,
+  getEventsByCompanyId,
   getAllEvents,
   updateEvent,
   deleteEvent,
