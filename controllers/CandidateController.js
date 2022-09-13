@@ -16,6 +16,10 @@ const {
   deleteSavedJobs,
 } = require("../controllers/CandidateSubcontrollers/JobsController");
 
+const {apply
+
+} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
+
 //candidate GET ALL JOB using pagination
 const getAllJobs = async (req, res) => {
   const PageSize = 5;
@@ -112,7 +116,7 @@ const getAllEvents = async (req, res) => {
 };
 
 const AddResume = async (req, res) => {
-  const { userID, skills, Location, PrimaryRole, Statement } = req.body;
+  const { userID,CV, skills, Location, PrimaryRole, Statement } = req.body;
   try {
     const find = await Resume.findOne({ userID });
     if (find) {
@@ -125,6 +129,7 @@ const AddResume = async (req, res) => {
       Location,
       PrimaryRole,
       Statement,
+      CV
     });
     if (add) {
       res.status(StatusCodes.OK).send({ msg: "Added" });
@@ -152,7 +157,7 @@ const getUserResume = async (req, res) => {
   }
 };
 const UpdateResume = async (req, res) => {
-  const { userID, skills, Location, PrimaryRole, Statement } = req.body;
+  const { userID, skills, Location, PrimaryRole, Statement,CV } = req.body;
   const filter = { userID: userID };
   try {
     const add = await Resume.updateOne(filter, {
@@ -161,6 +166,7 @@ const UpdateResume = async (req, res) => {
       Location,
       PrimaryRole,
       Statement,
+      CV
     });
     if (add) {
       res.status(StatusCodes.OK).send({ msg: "updated" });
@@ -207,5 +213,6 @@ module.exports = {
   getUserResume,
   UpdateResume,
   RemoveResume,
+  apply,
 };
 //
