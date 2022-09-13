@@ -17,7 +17,7 @@ const {
 router
   .route('/')
   .post([authenticateUser, authorizePermissions('company')], createJob)
-  .get(getAllJobs)
+  .get(authenticateUser, getAllJobs)
 
 router
   .route('/:id')

@@ -12,12 +12,21 @@ const {
   getAllEvents,
   updateEvent,
   deleteEvent,
+  getEventsByCompanyId,
 } = require('../controllers/eventController')
 
 router
   .route('/')
   .post([authenticateUser, authorizePermissions('company')], createEvent)
   .get(getAllEvents)
+
+//get events by Company ID (userId)
+router
+  .route('/eventsByCompanyId')
+  .get(
+    [authenticateUser, authorizePermissions('company')],
+    getEventsByCompanyId
+  )
 
 router
   .route('/:id')
