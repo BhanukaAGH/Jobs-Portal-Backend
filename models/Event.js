@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema({
     required: [true, 'Please provide company id'],
   },
 
-  eventTiltle: {
+  eventTitle: {
     type: String,
     required: [true, 'Please provide Event title'],
   },
@@ -23,7 +23,7 @@ const eventSchema = new mongoose.Schema({
   deliveryType: {
     type: String,
     enum: ['Virtual', 'Physical'],
-    required: [true, 'Please provide event location'],
+    required: [true, 'Please provide event delivery type'],
   },
 
   location: {
@@ -32,7 +32,7 @@ const eventSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: [true, 'Please provide event date'],
+    // required: [true, 'Please provide event date'],
   },
 
   description: {
