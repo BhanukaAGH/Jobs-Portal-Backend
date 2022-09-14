@@ -5,7 +5,6 @@ const { StatusCodes } = require("http-status-codes");
 //apply for jobs
 const apply = async (req, res) => {
   const { userID, JobID, ResumeID, CompanyID } = req.body;
-    console.log(userID, JobID, ResumeID, CompanyID)
   try {
     const check = await Resume.findOne({ _id:ResumeID });
     if (!check) {

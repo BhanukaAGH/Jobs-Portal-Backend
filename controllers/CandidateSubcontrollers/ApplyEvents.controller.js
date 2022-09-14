@@ -4,7 +4,6 @@ const { StatusCodes } = require("http-status-codes");
 //apply for events
 const applyForEvent = async (req, res) => {
   const { EventID, CompanyID, FName, LName, Email, Country, Role } =req.body;
-  console.log( EventID, CompanyID, FName, LName, Email, Country, Role);
   try {
     const find = await ApplyEvents.findOne({
       $and: [{ Email: Email }, { EventID: EventID }],
