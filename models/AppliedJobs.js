@@ -22,6 +22,10 @@ const AppliedJobsSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "Please provide job id"],
     },
+    ApplicationStatus: {
+      type: String,
+      default: 'applied'
+    },
   },
   { timestamps: true }
 );

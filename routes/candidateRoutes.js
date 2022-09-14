@@ -34,7 +34,8 @@ router.route('/viewResume/:userID').get(getUserResume)
 router.route('/removeResume/:userID').delete([authenticateUser, authorizePermissions('user')],RemoveResume)
 
 //APPLY JOBS ROUTE////////
-router.route('/apply').post([authenticateUser, authorizePermissions('user')],apply)
+//router.route('/apply').post([authenticateUser, authorizePermissions('user')],apply)
+router.route('/apply').post(apply)
 
 module.exports = router
 
