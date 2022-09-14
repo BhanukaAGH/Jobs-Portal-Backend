@@ -16,9 +16,8 @@ const {
   deleteSavedJobs,
 } = require("../controllers/CandidateSubcontrollers/JobsController");
 
-const {apply
-
-} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
+const {apply} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
+const {applyForEvent} = require("../controllers/CandidateSubcontrollers/ApplyEvents.controller");
 
 //candidate GET ALL JOB using pagination
 const getAllJobs = async (req, res) => {
@@ -214,5 +213,6 @@ module.exports = {
   UpdateResume,
   RemoveResume,
   apply,
+  applyForEvent,
 };
 //
