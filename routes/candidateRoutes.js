@@ -39,7 +39,7 @@ router.route('/userappliedJobs/:userID').get([authenticateUser, authorizePermiss
 
 
 //APPLY Events ROUTE////////
-router.route('/applyEvent').post([authenticateUser, authorizePermissions('user')],applyForEvent)
+router.route('/applyEvent').post(applyForEvent)
 
 module.exports = router
 
