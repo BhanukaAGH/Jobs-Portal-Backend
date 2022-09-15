@@ -16,7 +16,7 @@ const {
   deleteSavedJobs,
 } = require("../controllers/CandidateSubcontrollers/JobsController");
 
-const {apply} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
+const {apply,getUsersAppliedJobs} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
 const {applyForEvent} = require("../controllers/CandidateSubcontrollers/ApplyEvents.controller");
 
 //candidate GET ALL JOB using pagination
@@ -179,6 +179,7 @@ const UpdateResume = async (req, res) => {
     return;
   }
 };
+//reset resume
 const RemoveResume = async (req, res) => {
   const { userID: userID } = req.params;
   try {
@@ -196,7 +197,6 @@ const RemoveResume = async (req, res) => {
     return;
   }
 };
-
 module.exports = {
   getAllJobs,
   getAllEvents,
@@ -214,5 +214,6 @@ module.exports = {
   RemoveResume,
   apply,
   applyForEvent,
+  getUsersAppliedJobs
 };
 //
