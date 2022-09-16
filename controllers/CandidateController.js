@@ -16,8 +16,13 @@ const {
   deleteSavedJobs,
 } = require("../controllers/CandidateSubcontrollers/JobsController");
 
-const {apply,getUsersAppliedJobs} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
-const {applyForEvent} = require("../controllers/CandidateSubcontrollers/ApplyEvents.controller");
+const {
+  apply,
+  getUsersAppliedJobs,
+} = require("../controllers/CandidateSubcontrollers/ApplyJobs.controller");
+const {
+  applyForEvent,
+} = require("../controllers/CandidateSubcontrollers/ApplyEvents.controller");
 
 //candidate GET ALL JOB using pagination
 const getAllJobs = async (req, res) => {
@@ -115,30 +120,48 @@ const getAllEvents = async (req, res) => {
 };
 
 const AddResume = async (req, res) => {
-  const { userID,CV, skills, Location, PrimaryRole, Statement } = req.body;
+  const { userID, CV, skills, Location, PrimaryRole, Statement } = req.body;
   try {
     const find = await Resume.findOne({ userID });
     if (find) {
-      res.send({ msg: "Resume already Added" });
-      return;
-    }
-    const add = await Resume.create({
-      userID,
-      skills,
-      Location,
-      PrimaryRole,
-      Statement,
-      CV
-    });
-    if (add) {
-      res.status(StatusCodes.OK).send({ msg: "Added" });
+      const add = await Resume.updateOne(
+        { userID: userID },
+        {
+          userID,
+          skills,
+          Location,
+          PrimaryRole,
+          Statement,
+          CV,
+        }
+      );
+      if (add) {
+        res.status(StatusCodes.OK).send({ msg: "Added" });
+      } else {
+        res.status(StatusCodes.OK).send({ msg: "Error Adding" });
+        return;
+      }
     } else {
-      res.status(StatusCodes.OK).send({ msg: "Error Adding" });
-      return;
+      const add = await Resume.create(
+        {
+          userID,
+          skills,
+          Location,
+          PrimaryRole,
+          Statement,
+          CV,
+        }
+      );
+      if (add) {
+        res.status(StatusCodes.OK).send({ msg: "Created" });
+      } else {
+        res.status(StatusCodes.OK).send({ msg: "Error Created" });
+        return;
+      }
     }
   } catch (error) {
     console.log(error);
-    res.status(StatusCodes.OK).send({ msg: "Error Adding" });
+    res.status(StatusCodes.OK).send({ msg: "Error " });
     return;
   }
 };
@@ -156,7 +179,7 @@ const getUserResume = async (req, res) => {
   }
 };
 const UpdateResume = async (req, res) => {
-  const { userID, skills, Location, PrimaryRole, Statement,CV } = req.body;
+  const { userID, skills, Location, PrimaryRole, Statement, CV } = req.body;
   const filter = { userID: userID };
   try {
     const add = await Resume.updateOne(filter, {
@@ -165,7 +188,7 @@ const UpdateResume = async (req, res) => {
       Location,
       PrimaryRole,
       Statement,
-      CV
+      CV,
     });
     if (add) {
       res.status(StatusCodes.OK).send({ msg: "updated" });
@@ -183,9 +206,19 @@ const UpdateResume = async (req, res) => {
 const RemoveResume = async (req, res) => {
   const { userID: userID } = req.params;
   try {
-    const remove = await Resume.deleteOne({ userID: userID });
+    ///const remove = await Resume.deleteOne({ userID: userID });
+    const reset = await Resume.updateOne(
+      { userID: userID },
+      {
+        skills: "",
+        CV: "",
+        Location: "",
+        PrimaryRole: "",
+        Statement: "",
+      }
+    );
 
-    if (remove) {
+    if (reset) {
       res.status(StatusCodes.OK).send({ msg: "removed" });
     } else {
       res.status(StatusCodes.OK).send({ msg: "Error removing" });
@@ -214,6 +247,6 @@ module.exports = {
   RemoveResume,
   apply,
   applyForEvent,
-  getUsersAppliedJobs
+  getUsersAppliedJobs,
 };
 //
