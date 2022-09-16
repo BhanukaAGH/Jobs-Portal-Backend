@@ -24,7 +24,10 @@ const AppliedJobsSchema = new mongoose.Schema(
     },
     ApplicationStatus: {
       type: String,
-      enum: ['pending', 'accepted', 'rejected'],
+      enum: {
+        values: ['pending', 'accepted', 'rejected'],
+        message: 'Status is not valid',
+      },
       default: 'pending',
     },
   },
