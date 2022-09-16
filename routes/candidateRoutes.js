@@ -7,7 +7,7 @@ const {
   
 const {getAllJobs,saveJob,getSavedJobs,deleteSavedJobs,getAllEvents,
     saveEvent,getSavedEvents,deleteSavedEvents,getALLSavedJobs,getALLSavedEvents,
-    AddResume,getUserResume,UpdateResume,RemoveResume,apply,applyForEvent} = require('../controllers/CandidateController')
+    AddResume,getUserResume,UpdateResume,RemoveResume,apply,applyForEvent,getUsersAppliedJobs} = require('../controllers/CandidateController')
 
 //job routes////////
 router.route('/getAllJobs').post(getAllJobs)
@@ -35,7 +35,8 @@ router.route('/removeResume/:userID').delete([authenticateUser, authorizePermiss
 
 //APPLY JOBS ROUTE////////
 router.route('/apply').post([authenticateUser, authorizePermissions('user')],apply)
-//router.route('/apply').post(apply)
+router.route('/userappliedJobs/:userID').get([authenticateUser, authorizePermissions('user')],getUsersAppliedJobs)
+
 
 //APPLY Events ROUTE////////
 router.route('/applyEvent').post([authenticateUser, authorizePermissions('user')],applyForEvent)
