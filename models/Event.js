@@ -39,6 +39,7 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide event description'],
   },
-})
+  
+},{ timestamps: true })
 
 module.exports = mongoose.model('Event', eventSchema)

@@ -18,7 +18,9 @@ const companyRouter = require('./routes/companyRoutes')
 const jobRouter = require('./routes/jobRoutes')
 const candidateRouter = require('./routes/candidateRoutes')
 const eventRouter = require('./routes/eventRoutes')
+const adminReportRouter = require('./routes/adminReportRoutes')
 const applicantRouter = require('./routes/applicantRoutes')
+
 
 // middleware
 const notFoundMiddleware = require('./middleware/not-found')
@@ -38,6 +40,7 @@ app.use('/api/v1/company', companyRouter)
 app.use('/api/v1/job', jobRouter)
 app.use('/api/v1/candidate', candidateRouter)
 app.use('/api/v1/event', eventRouter)
+app.use('/api/v1/adminreport', adminReportRouter)
 app.use('/api/v1/applicant', applicantRouter)
 
 app.use(notFoundMiddleware)
