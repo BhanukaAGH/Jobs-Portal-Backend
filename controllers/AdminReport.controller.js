@@ -16,11 +16,12 @@ const EventReport = async (req, res) => {
         },
       },
     ]);
+    var totalapplied = await ApplyEvents.countDocuments()
 
     //populate company to event
     await Event.populate(report,{path:"company"})
 
-    res.status(StatusCodes.OK).json({ report });
+    res.status(StatusCodes.OK).json({ report,totalapplied });
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST)
   }
