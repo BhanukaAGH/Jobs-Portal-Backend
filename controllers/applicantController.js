@@ -42,7 +42,26 @@ const updateApplicantStatus = async (req, res) => {
   res.status(StatusCodes.OK).json(applyJob)
 }
 
+//! GET ALL COMPANY APPLICANTS
+const getAllCompanyApplicants = async (req, res) => {
+  const { companyId } = req.params
+  const jobApplicants = await AppliedJob.find({
+    CompanyID: companyId,
+  }).populate([
+    {
+      path: 'userID',
+      select: 'name photoUrl',
+    },
+    { path: 'ResumeID', select: 'CV PrimaryRole Statement' },
+  ])
+
+  res
+    .status(StatusCodes.OK)
+    .json({ applicants: jobApplicants, count: jobApplicants?.length })
+}
+
 module.exports = {
   getAllJobApplicants,
+  getAllCompanyApplicants,
   updateApplicantStatus,
 }

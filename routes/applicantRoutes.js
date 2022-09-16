@@ -8,8 +8,16 @@ const {
 
 const {
   getAllJobApplicants,
+  getAllCompanyApplicants,
   updateApplicantStatus,
 } = require('../controllers/applicantController')
+
+router
+  .route('/:companyId')
+  .get(
+    [authenticateUser, authorizePermissions('company')],
+    getAllCompanyApplicants
+  )
 
 router
   .route('/:companyId/:jobId')
