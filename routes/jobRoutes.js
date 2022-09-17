@@ -21,7 +21,7 @@ router
 
 router
   .route('/:id')
-  .get([authenticateUser, authorizePermissions('admin', 'company')], getJob)
+  .get(getJob)
   .patch(
     [authenticateUser, authorizePermissions('admin', 'company')],
     updateJob
