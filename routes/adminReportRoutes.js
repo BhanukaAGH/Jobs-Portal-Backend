@@ -9,6 +9,6 @@ const {
 const { EventReport } = require("../controllers/AdminReport.controller");
 
 
-router.route('/eventreport').get(EventReport)
+router.route('/eventreport').get([authenticateUser, authorizePermissions('admin')],EventReport)
 
 module.exports = router;
