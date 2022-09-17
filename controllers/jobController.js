@@ -12,7 +12,10 @@ const createJob = async (req, res) => {
 //! GET JOB
 const getJob = async (req, res) => {
   const { id: jobId } = req.params
-  const job = await Job.findOne({ _id: jobId })
+  const job = await Job.findOne({ _id: jobId }).populate({
+    path: 'company',
+    select: '-password -email',
+  })
 
   if (!job) {
     throw new CustomError.NotFoundError(`No job with id : ${jobId}`)
