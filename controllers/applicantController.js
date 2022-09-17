@@ -60,8 +60,47 @@ const getAllCompanyApplicants = async (req, res) => {
     .json({ applicants: jobApplicants, count: jobApplicants?.length })
 }
 
+//! GET MOST APPLIED JOBS
+const getMostAppliedJobs = async (req, res) => {
+  const result = await AppliedJob.aggregate([
+    {
+      $group: {
+        _id: '$JobID',
+        applyCount: {
+          $count: {},
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        applyCount: 1,
+        job: '$_id',
+      },
+    },
+    {
+      $sort: {
+        applyCount: -1,
+      },
+    },
+    {
+      $limit: 6,
+    },
+  ])
+
+  const data = await AppliedJob.populate(result, {
+    path: 'job',
+    model: 'Job',
+    select: '_id company jobTitle jobType workType',
+    populate: { path: 'company', model: 'User', select: 'photoUrl' },
+  })
+
+  res.status(StatusCodes.OK).json(data)
+}
+
 module.exports = {
   getAllJobApplicants,
   getAllCompanyApplicants,
+  getMostAppliedJobs,
   updateApplicantStatus,
 }

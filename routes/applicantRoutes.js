@@ -9,8 +9,11 @@ const {
 const {
   getAllJobApplicants,
   getAllCompanyApplicants,
+  getMostAppliedJobs,
   updateApplicantStatus,
 } = require('../controllers/applicantController')
+
+router.route('/getPopularJobs').get(getMostAppliedJobs)
 
 router
   .route('/:companyId')
