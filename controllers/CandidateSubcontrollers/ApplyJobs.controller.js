@@ -6,9 +6,16 @@ const { StatusCodes } = require("http-status-codes");
 const apply = async (req, res) => {
   const { userID, JobID, ResumeID, CompanyID } = req.body;
   try {
+    
+    const Checkcreated = await Resume.findOne({ userID:userID });
+
+    if (!Checkcreated) {
+      res.send({ msg: "You Have not created your resume" });
+      return;
+    }
     const check = await Resume.findOne({ _id:ResumeID });
-    if (!check) {
-      res.send({ msg: "You Have not setup ur resume" });
+    if (!check.CV && !check.Location && !check.PrimaryRole && !check.Statement) {
+      res.send({ msg: "You Have not setup your resume" });
       return;
     }
     const find = await AppliedJobs.findOne({
