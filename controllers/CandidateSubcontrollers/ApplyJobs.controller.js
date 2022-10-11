@@ -2,7 +2,7 @@ const AppliedJobs = require("../../models/AppliedJobs");
 const Resume = require("../../models/UserResume");
 const { StatusCodes } = require("http-status-codes");
 
-//apply for jobs
+//apply for jobs 
 const apply = async (req, res) => {
   const { userID, JobID, ResumeID, CompanyID } = req.body;
   try {
