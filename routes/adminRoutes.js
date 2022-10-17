@@ -8,6 +8,7 @@ const {
   accountDelete,
   UpdateStatus,
   getAllUsers,
+  companyDelete,
 } = require("../controllers/adminController");
 
 const {
@@ -32,8 +33,6 @@ router
 router
   .route("/delete/:id")
   .delete([authenticateUser, authorizePermissions("admin")], accountDelete);
-router
-  .route("/delete/company/:id")
-  .delete([authenticateUser, authorizePermissions("admin")], accountDelete);
+router.route("/delete/company/:id").delete(companyDelete);
 
 module.exports = router;

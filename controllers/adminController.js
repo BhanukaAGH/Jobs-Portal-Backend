@@ -105,10 +105,13 @@ exports.UpdateStatus = async (req, res) => {
 exports.companyDelete = async (req, res) => {
   try {
     const { id } = req.params;
-    const account = await Company.deleteOne({ _id: id });
+    const user = await User.findById(id);
+    const { _company } = user;
+    const companyOld = await Company.deleteOne({ _id: _company });
+    const userOld = await User.deleteOne({ _id: id });
     res.status(200).json({
       status: "success",
-      account,
+      // account,
     });
   } catch (error) {
     res.json({
