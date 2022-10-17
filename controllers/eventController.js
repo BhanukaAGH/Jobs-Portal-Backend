@@ -64,6 +64,37 @@ const deleteEvent = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'Success! event removed.' })
 }
 
+// Get Events report Data
+
+// const getEventsReportData = async (req, res) => {
+//   // const events = await Event.find({ company: req.user.userId })
+
+//   const report = await Event.aggregate([
+//     {
+//       $lookup: {
+//         from: 'applyevents',
+//         localField: '_id',
+//         foreignField: 'EventID',
+//         as: 'report',
+//       },
+//     },
+//   ])
+
+//   const reportByCompany = report.filter((event) => {
+//     return event.company._id.toString() === req.user.userId.toString()
+//   })
+
+//   console.log(reportByCompany)
+
+//   var total = 0
+
+//   reportByCompany.map((event) => {
+//     total = total + event.report.length
+//   })
+
+//   res.status(StatusCodes.OK).json({ reportByCompany, total })
+// }
+
 module.exports = {
   createEvent,
   getEvent,
@@ -71,4 +102,5 @@ module.exports = {
   getAllEvents,
   updateEvent,
   deleteEvent,
+  // getEventsReportData,
 }

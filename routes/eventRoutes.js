@@ -13,7 +13,12 @@ const {
   updateEvent,
   deleteEvent,
   getEventsByCompanyId,
+  // getEventsReportData,
 } = require('../controllers/eventController')
+
+// router
+//   .route('/eventReport')
+//   .get([authenticateUser, authorizePermissions('company')], getEventsReportData)
 
 router
   .route('/')
