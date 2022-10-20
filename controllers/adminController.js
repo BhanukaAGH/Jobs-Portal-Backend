@@ -1,137 +1,137 @@
-const User = require("../models/User");
-const Company = require("../models/Company");
+const User = require('../models/User')
+const Company = require('../models/Company')
 exports.accountCreate = async (req, res, next) => {
   try {
-    const admin = await User.create(req.body);
+    const admin = await User.create(req.body)
     res.status(201).json({
-      status: "success",
+      status: 'success',
       data: {
         account: admin,
       },
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.getAllAccounts = async (req, res, next) => {
   try {
-    const accounts = await User.find({ role: "admin" });
+    const accounts = await User.find({ role: 'admin' })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       accounts,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.getAccount = async (req, res) => {
   try {
-    const { id } = req.params;
-    const account = await User.findById({ _id: id });
+    const { id } = req.params
+    const account = await User.findById({ _id: id })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       account,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.accountUpdate = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params
     const account = await User.findByIdAndUpdate({ _id: id }, req.body, {
       new: true,
-    });
+    })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       account,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.accountDelete = async (req, res) => {
   try {
-    const { id } = req.params;
-    const account = await User.deleteOne({ _id: id });
+    const { id } = req.params
+    const account = await User.deleteOne({ _id: id })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       account,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.UpdateStatus = async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log(id);
-    console.log(req.body);
+    const { id } = req.params
+    console.log(id)
+    console.log(req.body)
     const account = await Company.findByIdAndUpdate({ _id: id }, req.body, {
       new: true,
-    });
+    })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       account,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.companyDelete = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    const { _company } = user;
-    const companyOld = await Company.deleteOne({ _id: _company });
-    const userOld = await User.deleteOne({ _id: id });
+    const { id } = req.params
+    const user = await User.findById(id)
+    const { _company } = user
+    await Company.deleteOne({ _id: _company })
+    await User.deleteOne({ _id: id })
     res.status(200).json({
-      status: "success",
+      status: 'success',
       // account,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find()
     res.status(200).json({
-      status: "success",
+      status: 'success',
       users,
-    });
+    })
   } catch (error) {
     res.json({
-      status: "fail",
+      status: 'fail',
       result: error,
-    });
+    })
   }
-};
+}

@@ -1,7 +1,6 @@
 const Job = require('../models/Job')
 const Event = require('../models/Event')
 const { StatusCodes } = require('http-status-codes')
-const User = require('../models/User')
 const Resume = require('../models/UserResume')
 const {
   getALLSavedEvents,
@@ -247,4 +246,3 @@ module.exports = {
   applyForEvent,
   getUsersAppliedJobs,
 }
-//
