@@ -1,4 +1,5 @@
 const Job = require('../models/Job')
+const AppliedJobs = require('../models/AppliedJobs')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 
@@ -52,6 +53,7 @@ const deleteJob = async (req, res) => {
     throw new CustomError.NotFoundError(`No job with id : ${jobId}`)
   }
 
+  await AppliedJobs.findOneAndRemove({ JobID: jobId })
   await job.remove()
   res.status(StatusCodes.OK).json({ msg: 'Success! Job removed.' })
 }
